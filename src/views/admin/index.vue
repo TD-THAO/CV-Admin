@@ -8,7 +8,11 @@
       <Header/>
 
       <div clas="admin-ctn">
-        <router-view></router-view>
+        <Breadcrumb />
+
+        <div class="admin-ctn__wrp text-left mx-3">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -18,11 +22,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Header from '@/layouts/Header.vue';
 import Sidebar from '@/layouts/Sidebar.vue';
+import Breadcrumb from '@/components/Breadcrumb.vue';
 
 @Component({
   components: {
     Header,
     Sidebar,
+    Breadcrumb,
   },
 })
 export default class Admin extends Vue {}
