@@ -1,0 +1,32 @@
+<template>
+  <div class="admin d-flex">
+    <div class="admin-left">
+      <Sidebar/>
+    </div>
+
+    <div class="admin-right">
+      <Header/>
+
+      <div clas="admin-ctn">
+        <router-view></router-view>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import Header from '@/layouts/Header.vue';
+import Sidebar from '@/layouts/Sidebar.vue';
+
+@Component({
+  components: {
+    Header,
+    Sidebar,
+  },
+})
+export default class Admin extends Vue {}
+</script>
+
+<style scoped lang="scss">
+</style>
