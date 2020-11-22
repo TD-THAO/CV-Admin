@@ -4,7 +4,7 @@
       <Sidebar/>
     </div>
 
-    <div class="admin-right">
+    <div class="admin-right flex-1">
       <Header/>
 
       <div clas="admin-ctn">

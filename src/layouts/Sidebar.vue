@@ -83,11 +83,4 @@ export default class Sidebar extends Vue {}
     padding: 1rem;
   }
 }
-.flex-1 {
-  flex: 1;
-}
-
-.font-10 {
-  font-size: 10px;
-}
 </style>
