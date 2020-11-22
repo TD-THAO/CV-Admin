@@ -1,0 +1,19 @@
+.auth {
+  width: 550px;
+  margin: 10% auto;
+
+  &-form {
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    background-color: #b8daff;
+    padding: 40px;
+
+    h1 {
+      color: #007bff82;
+    }
+
+    label {
+      width: 100%;
+      text-align: left;
+    }
+  }
+}
