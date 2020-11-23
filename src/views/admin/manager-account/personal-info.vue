@@ -3,155 +3,244 @@
     <div class="admin-ctn__title">
       <h5 class="font-weight-bold mb-3">Cập nhật thông tin cá nhân</h5>
     </div>
+    <ValidationObserver ref="personalInfoForm" tag="form" v-slot="{ invalid }">
+      <div class="c-form">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="username">Họ tên <span class="icon-required">*</span></label>
+              <ValidationProvider name="user_name" rules="required" v-slot="{ errors }">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  placeholder="Vui lòng nhập họ và tên"
+                  v-model="user.name"
+                />
 
-    <form class="c-form">
-      <div class="form-group">
-        <label for="user-name">Họ tên</label>
-        <input
-          type="text"
-          class="form-control"
-          id="user-name"
-          placeholder="Vui lòng nhập họ và tên"
-        />
-      </div>
-      <div class="form-group">
-        <label for="phone-number">Số điện thoại</label>
-        <input
-          type="text"
-          class="form-control"
-          id="phone-number"
-          placeholder="Vui lòng nhập số điện thoại"
-        />
-      </div>
+                <div class="invalid-error__mess">{{ errors[0] }}</div>
+              </ValidationProvider>
+            </div>
 
-      <div class="form-group row">
-        <div class="col-4">
-          <label for="day">Ngày sinh</label>
-          <select class="form-control" placeholder="Chọn ngày">
-            <option v-for="item in day" :key="item">{{ item }}</option>
-          </select>
+            <div class="form-group">
+              <label for="phone-number">Số điện thoại <span class="icon-required">*</span></label>
+              <ValidationProvider name="phone" rules="required" v-slot="{ errors }">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone-number"
+                  placeholder="Vui lòng nhập số điện thoại"
+                  v-model="user.phone"
+                />
+
+                <div class="invalid-error__mess">{{ errors[0] }}</div>
+              </ValidationProvider>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-4">
+                <label for="day">Ngày sinh <span class="icon-required">*</span></label>
+                <select class="form-control" v-model="user.day">
+                  <option value="" disabled hidden>Chọn ngày</option>
+                  <option v-for="item in days" :key="item">
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-4">
+                <label for="month">Tháng sinh <span class="icon-required">*</span></label>
+                <select class="form-control" v-model="user.month">
+                  <option value="" disabled hidden>Chọn tháng</option>
+                  <option v-for="item in months" :key="item">
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-4">
+                <label for="year">Năm sinh <span class="icon-required">*</span></label>
+                <select class="form-control" v-model="user.year">
+                  <option value="" disabled hidden>Chọn năm</option>
+                  <option v-for="item in years" :key="item">
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Địa chỉ email <span class="icon-required">*</span></label>
+              <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
+                <input :class="{'invalid-error__input': errors.length}"
+                  v-model="user.email"
+                  type="text"
+                  class="form-control"
+                  placeholder="Vui lòng nhập email"
+                />
+
+                <div class="invalid-error__mess">{{ errors[0] }}</div>
+              </ValidationProvider>
+            </div>
+
+            <div class="form-group">
+              <label for="sex" class="mb-0">Giới tính <span class="icon-required">*</span></label>
+              <div class="form-check form-check-inline ml-3">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gender"
+                  id="female"
+                  value="1"
+                  v-model="user.gender"
+                />
+                <label class="form-check-label label-radio" for="female"
+                  >Nữ</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gender"
+                  id="inlineRadio2"
+                  value="0"
+                  v-model="user.gender"
+                />
+                <label class="form-check-label label-radio" for="inlineRadio2"
+                  >Nam</label
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="marital-status" class="mb-0">Tình trạng hôn nhân <span class="icon-required">*</span></label>
+              <div class="form-check form-check-inline ml-3">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="maritalStatus"
+                  id="inlineRadio1"
+                  value="0"
+                  v-model="user.marital_status"
+                />
+                <label class="form-check-label label-radio" for="inlineRadio1"
+                  >Độc thân</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="maritalStatus"
+                  id="inlineRadio2"
+                  value="1"
+                  v-model="user.marital_status"
+                />
+                <label class="form-check-label label-radio" for="inlineRadio2"
+                  >Đã kết hôn</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="city">Tỉnh/Thành phố <span class="icon-required">*</span></label>
+              <select class="form-control" v-model="user.city">
+                <option value="" disabled hidden>Chọn Tỉnh/Thành phố</option>
+                <option v-for="item in cities" :key="item">
+                  {{ item }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="district">Huyện/Quận <span class="icon-required">*</span></label>
+              <select class="form-control" v-model="user.district">
+                <option value="" disabled hidden>Chọn Huyện/Quận</option>
+                <option v-for="item in districts" :key="item">
+                  {{ item }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="address">Địa chỉ <span class="icon-required">*</span></label>
+              <ValidationProvider name="address" rules="required" v-slot="{ errors }">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="address"
+                  placeholder="Vui lòng nhập địa chỉ"
+                  v-model="user.address"
+                />
+
+                <div class="invalid-error__mess">{{ errors[0] }}</div>
+              </ValidationProvider>
+            </div>
+          </div>
+
+          <div class="col-12 text-right">
+            <button type="button"
+              class="btn btn-primary"
+              :disabled="invalid"
+              @click="updateInfo">
+              Cập nhật
+            </button>
+          </div>
         </div>
-
-        <div class="col-4">
-          <label for="month">Tháng sinh</label>
-          <select class="form-control" placeholder="Chọn tháng">
-            <option v-for="item in month" :key="item">{{ item }}</option>
-          </select>
-        </div>
-
-        <div class="col-4">
-          <label for="year">Năm sinh</label>
-          <select class="form-control" placeholder="Chọn năm">
-            <option v-for="item in year" :key="item">{{ item }}</option>
-          </select>
-        </div>
       </div>
-
-      <div class="form-group">
-        <label for="email">Địa chỉ email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          placeholder="Vui lòng nhập email"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="text">Tỉnh/Thành phố</label>
-        <select class="form-control">
-          <option v-for="item in city" :key="item">{{ item }}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="text">Huyện/Quận</label>
-        <select class="form-control">
-          <option v-for="item in district" :key="item">{{ item }}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="text">Địa chỉ</label>
-        <select class="form-control">
-          <option v-for="item in address" :key="item">{{ item }}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="phone-number" class="mb-0">Giới tính</label>
-        <div class="form-check form-check-inline ml-3">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="inlineRadioOptions"
-            id="inlineRadio1"
-            value="option1"
-          />
-          <label class="form-check-label label-radio" for="inlineRadio1"
-            >Nữ</label
-          >
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="inlineRadioOptions"
-            id="inlineRadio2"
-            value="option2"
-          />
-          <label class="form-check-label label-radio" for="inlineRadio2"
-            >Nam</label
-          >
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="phone-number" class="mb-0">Tình trạng hôn nhân</label>
-        <div class="form-check form-check-inline ml-3">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="inlineRadioOptions"
-            id="inlineRadio1"
-            value="option1"
-          />
-          <label class="form-check-label label-radio" for="inlineRadio1"
-            >Độc thân</label
-          >
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="inlineRadioOptions"
-            id="inlineRadio2"
-            value="option2"
-          />
-          <label class="form-check-label label-radio" for="inlineRadio2"
-            >Đã kết hôn</label
-          >
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Cập nhật</button>
-
-    </form>
+    </ValidationObserver>
   </div>
 </template>
 
 <script lang='ts'>
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
+import { ValidationObserver, ValidationProvider } from 'vee-validate';
+import range from 'lodash/range';
 
 @Component({
-  components: {},
+  components: {
+    ValidationObserver,
+    ValidationProvider,
+  },
 })
 export default class PersonalInfomation extends Vue {
-  day = [1, 2, 3];
-  month = [1, 2, 3, 4];
-  year = [1, 2, 3, 4, 5];
-  city = ["đà nẵng", "quảng nam"];
-  district = ["đà nẵng", "quảng nam"];
-  address = ["đà nẵng", "quảng nam"];
+  days: number[] = [];
+  months: number[] = []; //mảng để chọn
+  years: number[] = [];
+  cities = ["đà nẵng", "quảng nam"];
+  districts = ["đà nẵng", "quảng nam"];
+
+  user = {
+    name: '',
+    email: '',
+    phone: '',
+    city: '',
+    district: '',
+    address: '',
+    gender: 1, // 1 la nu 0 la nam
+    marital_status: 0, // 1 la da ket hon, 0 single
+    day: '',
+    month: '', //biến số
+    year: '',
+  };
+
+  mounted() {
+    this.days = range(1, 32);
+    this.months = range(1, 13);
+    this.years = range(1970, 2021);
+  }
+
+  created() {
+    console.log(222222222);
+
+  }
+
+  updateInfo() {
+    console.log(this.user);
+  }
 }
 </script>
 
