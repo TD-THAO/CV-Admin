@@ -5,6 +5,8 @@ import router from './router';
 import store from './store';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
+import '@/shared/plugins/index';
+
 Vue.config.productionTip = !!process.env.VUE_APP_PRODUCTION;
 
 new Vue({
