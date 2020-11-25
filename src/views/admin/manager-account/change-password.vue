@@ -1,5 +1,5 @@
 <template>
-   <div class="bg-white px-4 py-3 c-card">
+   <div class="bg-white px-4 py-3 c-card text-left mx-3">
     <div class="admin-ctn__title">
       <h5 class="font-weight-bold mb-3">Đổi mật khẩu</h5>
     </div>

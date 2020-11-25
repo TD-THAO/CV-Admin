@@ -1,6 +1,6 @@
 import { configure, extend } from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import { confim_new_password } from './rules/index';
+// import { confim_new_password } from './rules/index';
 
 import { i18n } from '../i18n';
 
@@ -20,4 +20,4 @@ const configValidate = () => {
 configValidate();
 configure(config);
 
-extend('confim_new_password', confim_new_password);
+// extend('confim_new_password', confim_new_password);

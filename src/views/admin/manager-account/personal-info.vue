@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white px-4 py-3 c-card">
+  <div class="bg-white px-4 py-3 c-card text-left mx-3">
     <div class="admin-ctn__title">
       <h5 class="font-weight-bold mb-3">Cập nhật thông tin cá nhân</h5>
     </div>
@@ -254,8 +254,6 @@
               </ValidationProvider>
             </div>
           </div>
-
-          {{ user.birth_day }}
 
           <div class="col-12 text-right">
             <button
