@@ -1,27 +1,30 @@
 <template>
   <div class="admin d-flex">
     <div class="admin-left">
-      <Sidebar/>
+      <Sidebar />
     </div>
 
     <div class="admin-right flex-1">
-      <Header/>
+      <Header />
 
       <div clas="admin-ctn">
-        <Breadcrumb />
-
-        <div class="admin-ctn__wrp text-left mx-3">
-          <router-view></router-view>
-        </div>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Library</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data</li>
+          </ol>
+        </nav>
+        <router-view></router-view>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import Header from '@/layouts/Header.vue';
-import Sidebar from '@/layouts/Sidebar.vue';
+import { Component, Vue } from "vue-property-decorator";
+import Header from "@/layouts/Header.vue";
+import Sidebar from "@/layouts/Sidebar.vue";
 import Breadcrumb from '@/components/Breadcrumb.vue';
 
 @Component({
@@ -35,4 +38,10 @@ export default class Admin extends Vue {}
 </script>
 
 <style scoped lang="scss">
+.admin-right {
+  background-color: #eff3f6;
+}
+.breadcrumb {
+  background-color: transparent;
+}
 </style>
