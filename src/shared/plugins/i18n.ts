@@ -15,6 +15,13 @@ const i18n = new VueI18n({
         user_name: 'Họ tên',
         phone: 'Số điện thoại',
         address: 'Địa chỉ',
+        day: 'Ngày',
+        month: 'Tháng',
+        year: 'Năm',
+        city: 'Tỉnh/Thành phố',
+        district: 'Huyện/Quận',
+        new_password: 'Mật khẩu mới',
+        confirm_new_password: 'Xác nhận mật khẩu mới',
       },
 
       validation: {

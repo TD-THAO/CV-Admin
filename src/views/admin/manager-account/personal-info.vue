@@ -8,8 +8,14 @@
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="username">Họ tên <span class="icon-required">*</span></label>
-              <ValidationProvider name="user_name" rules="required" v-slot="{ errors }">
+              <label for="username"
+                >Họ tên <span class="icon-required">*</span></label
+              >
+              <ValidationProvider
+                name="user_name"
+                rules="required"
+                v-slot="{ errors }"
+              >
                 <input
                   type="text"
                   class="form-control"
@@ -23,8 +29,14 @@
             </div>
 
             <div class="form-group">
-              <label for="phone-number">Số điện thoại <span class="icon-required">*</span></label>
-              <ValidationProvider name="phone" rules="required" v-slot="{ errors }">
+              <label for="phone-number"
+                >Số điện thoại <span class="icon-required">*</span></label
+              >
+              <ValidationProvider
+                name="phone"
+                rules="required"
+                v-slot="{ errors }"
+              >
                 <input
                   type="text"
                   class="form-control"
@@ -39,40 +51,74 @@
 
             <div class="form-group row">
               <div class="col-4">
-                <label for="day">Ngày sinh <span class="icon-required">*</span></label>
-                <select class="form-control" v-model="user.day">
-                  <option value="" disabled hidden>Chọn ngày</option>
-                  <option v-for="item in days" :key="item">
-                    {{ item }}
-                  </option>
-                </select>
+                <label for="day"
+                  >Ngày sinh <span class="icon-required">*</span></label
+                >
+                <ValidationProvider
+                  name="day"
+                  rules="required"
+                  v-slot="{ errors }"
+                >
+                  <select class="form-control" v-model="user.day">
+                    <option value="" disabled hidden>--Chọn ngày--</option>
+                    <option v-for="item in days" :key="item">
+                      {{ item }}
+                    </option>
+                  </select>
+                  <div class="invalid-error__mess">{{ errors[0] }}</div>
+                </ValidationProvider>
               </div>
 
               <div class="col-4">
-                <label for="month">Tháng sinh <span class="icon-required">*</span></label>
-                <select class="form-control" v-model="user.month">
-                  <option value="" disabled hidden>Chọn tháng</option>
-                  <option v-for="item in months" :key="item">
-                    {{ item }}
-                  </option>
-                </select>
+                <label for="month"
+                  >Tháng sinh <span class="icon-required">*</span></label
+                >
+                <ValidationProvider
+                  name="month"
+                  rules="required"
+                  v-slot="{ errors }"
+                >
+                  <select class="form-control" v-model="user.month">
+                    <option value="" disabled hidden>--Chọn tháng--</option>
+                    <option v-for="item in months" :key="item">
+                      {{ item }}
+                    </option>
+                  </select>
+                  <div class="invalid-error__mess">{{ errors[0] }}</div>
+                </ValidationProvider>
               </div>
 
               <div class="col-4">
-                <label for="year">Năm sinh <span class="icon-required">*</span></label>
-                <select class="form-control" v-model="user.year">
-                  <option value="" disabled hidden>Chọn năm</option>
-                  <option v-for="item in years" :key="item">
-                    {{ item }}
-                  </option>
-                </select>
+                <label for="year"
+                  >Năm sinh <span class="icon-required">*</span></label
+                >
+                <ValidationProvider
+                  name="year"
+                  rules="required"
+                  v-slot="{ errors }"
+                >
+                  <select class="form-control" v-model="user.year">
+                    <option value="" disabled hidden>--Chọn năm--</option>
+                    <option v-for="item in years" :key="item">
+                      {{ item }}
+                    </option>
+                  </select>
+                  <div class="invalid-error__mess">{{ errors[0] }}</div>
+                </ValidationProvider>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="email">Địa chỉ email <span class="icon-required">*</span></label>
-              <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
-                <input :class="{'invalid-error__input': errors.length}"
+              <label for="email"
+                >Địa chỉ email <span class="icon-required">*</span></label
+              >
+              <ValidationProvider
+                name="email"
+                rules="required|email"
+                v-slot="{ errors }"
+              >
+                <input
+                  :class="{ 'invalid-error__input': errors.length }"
                   v-model="user.email"
                   type="text"
                   class="form-control"
@@ -84,14 +130,16 @@
             </div>
 
             <div class="form-group">
-              <label for="sex" class="mb-0">Giới tính <span class="icon-required">*</span></label>
+              <label for="sex" class="mb-0"
+                >Giới tính <span class="icon-required">*</span></label
+              >
               <div class="form-check form-check-inline ml-3">
                 <input
                   class="form-check-input"
                   type="radio"
                   name="gender"
                   id="female"
-                  value="1"
+                  value="true"
                   v-model="user.gender"
                 />
                 <label class="form-check-label label-radio" for="female"
@@ -104,7 +152,7 @@
                   type="radio"
                   name="gender"
                   id="inlineRadio2"
-                  value="0"
+                  value="false"
                   v-model="user.gender"
                 />
                 <label class="form-check-label label-radio" for="inlineRadio2"
@@ -114,14 +162,16 @@
             </div>
 
             <div class="form-group">
-              <label for="marital-status" class="mb-0">Tình trạng hôn nhân <span class="icon-required">*</span></label>
+              <label for="marital-status" class="mb-0"
+                >Tình trạng hôn nhân <span class="icon-required">*</span></label
+              >
               <div class="form-check form-check-inline ml-3">
                 <input
                   class="form-check-input"
                   type="radio"
                   name="maritalStatus"
                   id="inlineRadio1"
-                  value="0"
+                  value="false"
                   v-model="user.marital_status"
                 />
                 <label class="form-check-label label-radio" for="inlineRadio1"
@@ -134,7 +184,7 @@
                   type="radio"
                   name="maritalStatus"
                   id="inlineRadio2"
-                  value="1"
+                  value="true"
                   v-model="user.marital_status"
                 />
                 <label class="form-check-label label-radio" for="inlineRadio2"
@@ -146,28 +196,52 @@
 
           <div class="col-6">
             <div class="form-group">
-              <label for="city">Tỉnh/Thành phố <span class="icon-required">*</span></label>
-              <select class="form-control" v-model="user.city">
-                <option value="" disabled hidden>Chọn Tỉnh/Thành phố</option>
-                <option v-for="item in cities" :key="item">
-                  {{ item }}
-                </option>
-              </select>
+              <label for="city"
+                >Tỉnh/Thành phố <span class="icon-required">*</span></label
+              >
+              <ValidationProvider
+                name="city"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <select class="form-control" v-model="user.city">
+                  <option value="" disabled hidden>Chọn Tỉnh/Thành phố</option>
+                  <option v-for="item in cities" :key="item">
+                    {{ item }}
+                  </option>
+                </select>
+                <div class="invalid-error__mess">{{ errors[0] }}</div>
+              </ValidationProvider>
             </div>
 
             <div class="form-group">
-              <label for="district">Huyện/Quận <span class="icon-required">*</span></label>
-              <select class="form-control" v-model="user.district">
-                <option value="" disabled hidden>Chọn Huyện/Quận</option>
-                <option v-for="item in districts" :key="item">
-                  {{ item }}
-                </option>
-              </select>
+              <label for="district"
+                >Huyện/Quận <span class="icon-required">*</span></label
+              >
+              <ValidationProvider
+                name="district"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <select class="form-control" v-model="user.district">
+                  <option value="" disabled hidden>Chọn Huyện/Quận</option>
+                  <option v-for="item in districts" :key="item">
+                    {{ item }}
+                  </option>
+                </select>
+                <div class="invalid-error__mess">{{ errors[0] }}</div>
+              </ValidationProvider>
             </div>
 
             <div class="form-group">
-              <label for="address">Địa chỉ <span class="icon-required">*</span></label>
-              <ValidationProvider name="address" rules="required" v-slot="{ errors }">
+              <label for="address"
+                >Địa chỉ <span class="icon-required">*</span></label
+              >
+              <ValidationProvider
+                name="address"
+                rules="required"
+                v-slot="{ errors }"
+              >
                 <input
                   type="text"
                   class="form-control"
@@ -181,11 +255,15 @@
             </div>
           </div>
 
+          {{ user.birth_day }}
+
           <div class="col-12 text-right">
-            <button type="button"
+            <button
+              type="button"
               class="btn btn-primary"
               :disabled="invalid"
-              @click="updateInfo">
+              @click="updateInfo"
+            >
               Cập nhật
             </button>
           </div>
@@ -199,6 +277,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import range from 'lodash/range';
+import { User } from '@/shared/models/user';
+import { DAY, MONTH, YEAR } from '@/shared/constants/date';
 
 @Component({
   components: {
@@ -207,39 +287,38 @@ import range from 'lodash/range';
   },
 })
 export default class PersonalInfomation extends Vue {
-  days: number[] = [];
-  months: number[] = []; //mảng để chọn
-  years: number[] = [];
-  cities = ["đà nẵng", "quảng nam"];
-  districts = ["đà nẵng", "quảng nam"];
+  public days: number[] = DAY;
+  public months: number[] = MONTH; // mảng để chọn
+  public years: number[] = YEAR;
+  public cities = ['đà nẵng', 'quảng nam'];
+  public districts = ['đà nẵng', 'quảng nam'];
 
-  user = {
-    name: '',
-    email: '',
-    phone: '',
-    city: '',
-    district: '',
-    address: '',
-    gender: 1, // 1 la nu 0 la nam
-    marital_status: 0, // 1 la da ket hon, 0 single
-    day: '',
-    month: '', //biến số
-    year: '',
-  };
+  public user: User = new User();
 
-  mounted() {
-    this.days = range(1, 32);
-    this.months = range(1, 13);
-    this.years = range(1970, 2021);
+  public mounted() {
+    this.getUserInfo();
   }
 
-  created() {
-    console.log(222222222);
-
+  public updateInfo() {
+    // Call api to update user info
   }
 
-  updateInfo() {
-    console.log(this.user);
+  public getUserInfo() {
+    const data = {
+      name: 'Nhu Hieu',
+      email: 'abc@gmail.com',
+      phone: '0905594382',
+      city: '',
+      district: '',
+      address: '',
+      gender: true,
+      marital_status: false,
+      day: '',
+      month: '',
+      year: '',
+    };
+
+    this.user = new User().deserialize(data);
   }
 }
 </script>
