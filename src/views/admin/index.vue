@@ -34,7 +34,7 @@ import Breadcrumb from '@/components/Breadcrumb.vue';
     Breadcrumb,
   },
 })
-export default class Admin extends Vue {}
+export default class ManagerApplication extends Vue {}
 </script>
 
 <style scoped lang="scss">
