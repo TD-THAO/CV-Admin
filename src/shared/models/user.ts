@@ -68,5 +68,15 @@ export class User implements Deserializable<User>, UserInput {
 
     return data;
   }
+
+  public formpasswordString() {
+    const data = {
+      password: this.password,
+      new_password: this.new_password,
+      confirm_new_password: this.confirm_new_password,
+    };
+
+    return data;
+  }
 }
 

@@ -299,13 +299,14 @@ export default class PersonalInfomation extends Vue {
 
   public updateInfo() {
     // Call api to update user info
+    console.log(this.user.formJSONString());
   }
 
   public getUserInfo() {
     const data = {
-      name: 'Nhu Hieu',
-      email: 'abc@gmail.com',
-      phone: '0905594382',
+      name: 'Da Thao',
+      email: 'tdthao29@gmail.com',
+      phone: '0777919749',
       city: '',
       district: '',
       address: '',

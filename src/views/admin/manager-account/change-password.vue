@@ -83,6 +83,7 @@ export default class ChangePassword extends Vue {
 
   public changePassword() {
     // Call api to change password
+    console.log(this.user.formpasswordString());
   }
 }
 </script>
