@@ -33,13 +33,23 @@ export default class ManagerApplicationInfo extends Vue {
     },
     {
       path: 'step2',
-      name: 'Thông tin cá nhân 2',
+      name: 'Thông tin hồ sơ',
       icon: '2'
     },
     {
       path: 'step3',
-      name: 'Thông tin cá nhân 3',
+      name: 'Học vấn bằng cấp',
       icon: '3'
+    },
+    {
+      path: 'step4',
+      name: 'Kinh nghiệm làm việc',
+      icon: '4'
+    },
+    {
+      path: 'step5',
+      name: 'Kỹ năng',
+      icon: '5'
     },
   ];
 
@@ -61,12 +71,12 @@ $col-main: #3e96d6;
 
     &::after {
       content: '';
-      width: 71%;
+      width: 70%;
       height: 2px;
       position: absolute;
       background-color: #ddd;
       top: 21px;
-      left: -130px;
+      left: calc((-100% / 3) - 10px);
       background-color: $col-main;
     }
 

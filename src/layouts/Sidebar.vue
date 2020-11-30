@@ -17,7 +17,9 @@
           </li>
           <li class="list-group-item text-left border-0 p-3">
             <i class="fa fa-circle-o font-10"></i>
-            <a href=""><span>Tạo hồ sơ</span></a>
+            <router-link to="/admin/create-profile">
+              <span>Tạo hồ sơ</span>
+            </router-link>
           </li>
         </ul>
       </li>
