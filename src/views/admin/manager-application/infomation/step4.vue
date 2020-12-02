@@ -1,14 +1,14 @@
 <template>
   <div class="bg-white px-4 py-3 c-card text-left mx-3">
     <div class="admin-ctn__title">
-      <h5 class="font-weight-bold mb-3">Học vấn bằng cấp</h5>
+      <h5 class="font-weight-bold mb-3">Kinh nghiệm làm việc</h5>
     </div>
-    <ValidationObserver ref="personalInfoForm" tag="form" v-slot="{ invalid }">
+    <ValidationObserver ref="experienceForm" tag="form" v-slot="{ invalid }">
       <div class="c-form">
         <div class="row">
           <div class="col-6">
-             <div class="form-group">
-              <label for="name_job">Chức danh / vị trí <span class="icon-required">*</span></label>
+           <div class="form-group">
+              <label for="name_job">Chức năng/ vị trí <span class="icon-required">*</span></label>
 
               <ValidationProvider
                 name="name_job"
@@ -19,35 +19,40 @@
                   type="text"
                   class="form-control"
                   id="name_job"
-                  placeholder="Vui lòng nhập chức danh"
-                  v-model="application.name_job"
+                  placeholder="Vui lòng nhập chức danh/ vị trí"
+                  v-model="experience.name_job"
                 />
 
                 <div class="invalid-error__mess">{{ errors[0] }}</div>
               </ValidationProvider>
             </div>
 
-            <!-- <div class="form-group">
-              <label for="training_center">Thời gian bắt đầu <span class="icon-required">*</span></label
-              >
-              <ValidationProvider
-                name="training_center"
-                rules="required"
-                v-slot="{ errors }"
-              >
-                <select class="form-control" v-model="application.training_center">
-                  <option value="" disabled hidden>Chọn tên trường</option>
-                  <option v-for="item in training_centers" :key="item">
-                    {{ item }}
-                  </option>
-                </select>
-                <div class="invalid-error__mess">{{ errors[0] }}</div>
-              </ValidationProvider>
-            </div> -->
+             <div class="form-group">
+              <label for="start_at">Thời gian bắt đầu</label>
+
+              <div class="row">
+                <div class="col-6">
+                  <select class="form-control" v-model="experience.start_at_month">
+                    <option value="" disabled hidden>Chọn tháng</option>
+                    <option v-for="item in months" :key="item">
+                      {{ item }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <select class="form-control" v-model="experience.start_at_year">
+                    <option value="" disabled hidden>Chọn năm</option>
+                    <option v-for="item in years" :key="item">
+                      {{ item }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="col-6">
-            <div class="form-group">
+           <div class="form-group">
               <label for="company">Công ty <span class="icon-required">*</span></label>
 
               <ValidationProvider
@@ -59,33 +64,36 @@
                   type="text"
                   class="form-control"
                   id="company"
-                  placeholder="Vui lòng nhập công ty"
-                  v-model="application.company"
+                  placeholder="Vui lòng nhập công ty"
+                  v-model="experience.company"
                 />
 
                 <div class="invalid-error__mess">{{ errors[0] }}</div>
               </ValidationProvider>
             </div>
 
+              <div class="form-group">
+              <label for="end_at">Thời gian kết thúc</label>
 
-
-             <!-- <div class="form-group">
-              <label for="classification">Thời gian kết thúc <span class="icon-required">*</span></label
-              >
-              <ValidationProvider
-                name="classification"
-                rules="required"
-                v-slot="{ errors }"
-              >
-                <select class="form-control" v-model="application.classification">
-                  <option value="" disabled hidden>Chọn xếp loại</option>
-                  <option v-for="item in classifications" :key="item">
-                    {{ item }}
-                  </option>
-                </select>
-                <div class="invalid-error__mess">{{ errors[0] }}</div>
-              </ValidationProvider>
-            </div> -->
+              <div class="row">
+                <div class="col-6">
+                  <select class="form-control" v-model="experience.end_at_month">
+                    <option value="" disabled hidden>Chọn tháng</option>
+                    <option v-for="item in months" :key="item">
+                      {{ item }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <select class="form-control" v-model="experience.end_at_year">
+                    <option value="" disabled hidden>Chọn năm</option>
+                    <option v-for="item in years" :key="item">
+                      {{ item }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="col-12 text-right">
@@ -93,7 +101,7 @@
               type="button"
               class="btn btn-primary"
               :disabled="invalid"
-              @click="updateInfo"
+              @click="addInfo"
             >
               Thêm mới
             </button>
@@ -107,48 +115,36 @@
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
-import { Education } from '@/shared/models/education';
-
+import { Experience } from '@/shared/models/experience';
+import { MONTH, YEAR } from '@/shared/constants/date';
 @Component({
   components: {
     ValidationObserver,
     ValidationProvider,
   },
 })
-export default class EducationInfomation extends Vue {
-  public education: Education = new Education();
-  public start_at = [
-  ];
-  public end_at = [
-  ];
+export default class experienceInfomation extends Vue {
+  public experience: Experience = new Experience();
+  public months: number[] = MONTH;
+  public years: number[] = YEAR;
 
   public mounted() {
-    console.log(this.education);
+    console.log(this.experience);
 
-    this.getEducationInfo();
+    this.getExperienceInfo();
   }
 
-  public updateInfo() {
+  public addInfo() {
     // Call api to update user info
-    console.log(this.education.formEducationString());
+    console.log(this.experience.formExperienceString());
   }
 
-  public getEducationInfo() {
+  public getExperienceInfo() {
     const data = {
-      // name: 'Da Thao',
-      // email: 'tdthao29@gmail.com',
-      // phone: '0777919749',
-      // city: '',
-      // district: '',
-      // address: '',
-      // gender: true,
-      // marital_status: false,
-      // day: '',
-      // month: '',
-      // year: '',
+
     };
 
-    this.education = new Education().deserialize(data);
+    this.experience = new Experience().deserialize(data);
   }
 }
 </script>
