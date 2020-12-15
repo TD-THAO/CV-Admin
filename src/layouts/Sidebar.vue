@@ -11,11 +11,15 @@
         <ul class="list-group sidebar-list__group-children">
           <li class="list-group-item text-left border-0 p-3">
             <i class="fa fa-circle-o font-10 "></i>
-            <a href=""><span>Cập nhật thông tin hồ sơ</span></a>
+            <router-link to="/admin/complete-profile">
+              <span>Cập nhật thông tin hồ sơ</span>
+            </router-link>
           </li>
           <li class="list-group-item text-left border-0 p-3">
             <i class="fa fa-circle-o font-10"></i>
-            <a href=""><span>Tạo hồ sơ</span></a>
+            <router-link to="/admin/create-profile">
+              <span>Tạo hồ sơ</span>
+            </router-link>
           </li>
         </ul>
       </li>
