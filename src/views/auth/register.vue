@@ -1,8 +1,8 @@
 <template>
- <div class="container auth">
+ <div class="auth">
     <div class="auth-form">
       <form>
-        <h1>FiWor</h1>
+        <h1 class="mb-5">Đăng ký</h1>
         <div class="form-group">
           <label for="">Họ và tên</label>
           <input type="text" class="form-control" id="exampleInputUsername" placeholder="Vui lòng nhập họ và tên" />
@@ -26,8 +26,17 @@
           <label for="">Địa chỉ email</label>
           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  placeholder="Vui lòng nhập email" />
         </div>
-        <button type="submit" class="btn btn-primary">Đăng ký</button>
+
+        <button type="submit" class="btn btn-gradient btn-gradient--galaxy w-100 rounded-pill mt-4">Đăng ký</button>
       </form>
+
+      <p class="auth-form__footer mt-5 mb-0">
+        Bạn đã có tài khoản?
+        <router-link
+          to="/login">
+          Đăng nhập
+        </router-link>
+      </p>
     </div>
   </div>
 </template>
@@ -38,5 +47,5 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component({
   components: {},
 })
-export default class Registration extends Vue {}
+export default class Register extends Vue {}
 </script>

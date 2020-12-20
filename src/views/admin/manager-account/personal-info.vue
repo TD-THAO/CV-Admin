@@ -277,6 +277,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import range from 'lodash/range';
 import { User } from '@/shared/models/user';
 import { DAY, MONTH, YEAR } from '@/shared/constants/date';
+import * as firebase from 'firebase/app';
 
 @Component({
   components: {
@@ -292,6 +293,7 @@ export default class PersonalInfomation extends Vue {
   districts = ['đà nẵng', 'quảng nam'];
 
   user: User = new User();
+  database = firebase.database();
 
   mounted() {
     this.getUserInfo();
@@ -303,21 +305,36 @@ export default class PersonalInfomation extends Vue {
   }
 
   getUserInfo() {
-    const data = {
-      name: 'Da Thao',
-      email: 'tdthao29@gmail.com',
-      phone: '0777919749',
-      city: '',
-      district: '',
-      address: '',
-      gender: true,
-      marital_status: false,
-      day: '',
-      month: '',
-      year: '',
-    };
+    // const data = {
+    //   name: 'Da Thao',
+    //   email: 'tdthao29@gmail.com',
+    //   phone: '0777919749',
+    //   city: '',
+    //   district: '',
+    //   address: '',
+    //   gender: true,
+    //   marital_status: false,
+    //   day: '',
+    //   month: '',
+    //   year: '',
+    // };
 
-    this.user = new User().deserialize(data);
+    // this.user = new User().deserialize(data);
+    firebase.database().ref('/users').on('value', (snapshot) =>{
+      const data = snapshot.val();
+      console.log(data, 123);
+    }, (error: any) => {
+      if (error) {
+        console.log(error)
+      }
+    });
+
+    // firebase.database().ref('/books').on('value')
+    // .then((snapshot) => {
+    //   const data = snapshot.val();
+    // })
+
+
   }
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
-  <div class="container auth">
+  <div class="auth">
     <div class="auth-form">
       <form>
-        <h1>FiWor</h1>
+        <h1 class="mb-5">Đăng nhập</h1>
         <div class="form-group">
           <input
             type="email"
@@ -20,13 +20,16 @@
             placeholder="Mật khẩu"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+        <button type="submit" class="btn btn-gradient btn-gradient--galaxy w-100 rounded-pill mt-4">Đăng nhập</button>
       </form>
-      <form action="" method="post">
-        <div class="login-regist">
-          <p>Bạn chưa có tài khoản?<a href="#">Đăng ký</a></p>
-        </div>
-      </form>
+
+      <p class="auth-form__footer mt-5 mb-0">
+        Bạn chưa có tài khoản?
+        <router-link
+          to="/register">
+          Đăng ký
+        </router-link>
+      </p>
     </div>
   </div>
 </template>

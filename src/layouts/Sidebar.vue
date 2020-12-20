@@ -79,6 +79,8 @@ export default class Sidebar extends Vue {}
     .list-group-item {
       border: 0;
       padding: 0;
+      background: rgba(255, 251, 251, 27%);
+      color: #fff;
     }
   }
 
