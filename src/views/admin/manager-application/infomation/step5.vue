@@ -102,15 +102,15 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
   components: {
 
   },
 })
-export default class skillInfomation extends Vue {
-  public skills = [
+export default class SkillInfomation extends Vue {
+  skills = [
     'Kỹ năng giao tiếp',
     'Kỹ năng làm việc theo nhóm',
     'Kỹ năng làm việc theo nhóm 1',
@@ -120,11 +120,11 @@ export default class skillInfomation extends Vue {
     'Kỹ năng làm việc theo nhóm 5',
   ];
 
-  public levels = [
+  levels = [
     'Sơ cấp', 'Trung cấp', 'Cao cấp', 'Bản ngữ',
   ];
 
-  public foreignLanguages = [
+  foreignLanguages = [
     {
       name: 'Tiếng Anh',
       level: '',
@@ -135,21 +135,21 @@ export default class skillInfomation extends Vue {
     },
   ];
 
-  public selectedLanguages: any = [];
+  selectedLanguages: any = [];
 
-  public selectedSkills = [];
+  selectedSkills = [];
 
-  public mounted() {
+  mounted() {
     this.getSkillInfo();
   }
 
-  public addInfo() {
+  addInfo() {
     // Call api to update user info
     console.log(this.selectedSkills);
-    console.log(this.selectedLanguages)
+    console.log(this.selectedLanguages);
   }
 
-  public getSkillInfo() {
+  getSkillInfo() {
     const data: any = [
       'Kỹ năng giao tiếp',
       'Kỹ năng làm việc theo nhóm',

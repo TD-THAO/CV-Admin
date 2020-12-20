@@ -285,24 +285,24 @@ import { DAY, MONTH, YEAR } from '@/shared/constants/date';
   },
 })
 export default class PersonalInfomation extends Vue {
-  public days: number[] = DAY;
-  public months: number[] = MONTH; // mảng để chọn
-  public years: number[] = YEAR;
-  public cities = ['đà nẵng', 'quảng nam'];
-  public districts = ['đà nẵng', 'quảng nam'];
+  days: number[] = DAY;
+  months: number[] = MONTH; // mảng để chọn
+  years: number[] = YEAR;
+  cities = ['đà nẵng', 'quảng nam'];
+  districts = ['đà nẵng', 'quảng nam'];
 
-  public user: User = new User();
+  user: User = new User();
 
-  public mounted() {
+  mounted() {
     this.getUserInfo();
   }
 
-  public updateInfo() {
+  updateInfo() {
     // Call api to update user info
     console.log(this.user.formJSONString());
   }
 
-  public getUserInfo() {
+  getUserInfo() {
     const data = {
       name: 'Da Thao',
       email: 'tdthao29@gmail.com',

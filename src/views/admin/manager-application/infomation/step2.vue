@@ -184,10 +184,10 @@ import { Application } from '@/shared/models/application';
   },
 })
 export default class ApplicationInfomation extends Vue {
-  public application: Application = new Application();
-  public yearsExperience = [1, 2, 3];
-  public careers = ['IT'];
-  public ranks = [
+  application: Application = new Application();
+  yearsExperience = [1, 2, 3];
+  careers = ['IT'];
+  ranks = [
     'Mới tốt nghiệp/Thực tập sinh',
     'Junior Developer',
     'Senior Developer',
@@ -198,7 +198,7 @@ export default class ApplicationInfomation extends Vue {
     'Developer Manager',
     'Senior Leadership',
   ];
-  public academic_levels = [
+  academic_levels = [
     'Trung Học',
     'Trung Cấp',
     'Cao Đẳng',
@@ -208,16 +208,16 @@ export default class ApplicationInfomation extends Vue {
     'Thạc Sĩ',
     'Tiến Sĩ',
   ];
-  public workplaces = [
+  workplaces = [
     'Đà Nẵng',
   ];
-  public type_works = [
+  type_works = [
     'Thực tập',
     'Part time',
     'Full time',
     'Theo hợp đồng/ tư vấn',
   ];
-  public salaries = [
+  salaries = [
     '1-5 triệu trở lên',
     '5-10 triệu trở lên',
     '10-15 triệu trở lên',
@@ -225,18 +225,18 @@ export default class ApplicationInfomation extends Vue {
     '30 triệu trở lên',
   ];
 
-  public mounted() {
+  mounted() {
     console.log(this.application);
 
     this.getApplicationInfo();
   }
 
-  public updateInfo() {
+  updateInfo() {
     // Call api to update user info
     console.log(this.application.formApplicationString());
   }
 
-  public getApplicationInfo() {
+  getApplicationInfo() {
     const data = {
       // name: 'Da Thao',
       // email: 'tdthao29@gmail.com',

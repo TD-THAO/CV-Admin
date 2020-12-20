@@ -21,10 +21,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Header from "@/layouts/Header.vue";
-import Sidebar from "@/layouts/Sidebar.vue";
+<script lang='ts'>
+import { Component, Vue } from 'vue-property-decorator';
+import Header from '@/layouts/Header.vue';
+import Sidebar from '@/layouts/Sidebar.vue';
 import Breadcrumb from '@/components/Breadcrumb.vue';
 
 @Component({
@@ -37,7 +37,7 @@ import Breadcrumb from '@/components/Breadcrumb.vue';
 export default class ManagerApplication extends Vue {}
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
 .admin-right {
   background-color: #eff3f6;
 }

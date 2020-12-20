@@ -7,9 +7,9 @@ export interface ForeignLanguageInput {
 }
 
 export class ForeignLanguage implements Deserializable<ForeignLanguage>, ForeignLanguageInput {
-  public id: number;
-  public name: string = '';
-  public level: string = '';
+  id: number;
+  name: string = '';
+  level: string = '';
 
   constructor() {
     this.deserialize({
@@ -17,7 +17,7 @@ export class ForeignLanguage implements Deserializable<ForeignLanguage>, Foreign
     });
   }
 
-  public deserialize(input: Partial<ForeignLanguageInput>): ForeignLanguage {
+  deserialize(input: Partial<ForeignLanguageInput>): ForeignLanguage {
     if (!input) {
       return this;
     }

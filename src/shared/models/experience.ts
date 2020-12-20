@@ -1,12 +1,12 @@
 import { Deserializable } from '@/shared/interfaces/deserialize';
 
 export interface ExperienceInput {
-  name_job: string,
-  company: string,
-  start_at_month: number | string,
-  end_at_month: number | string,
-  start_at_year: number | string,
-  end_at_year: number | string,
+  name_job: string;
+  company: string;
+  start_at_month: number | string;
+  end_at_month: number | string;
+  start_at_year: number | string;
+  end_at_year: number | string;
 }
 
 export class Experience implements Deserializable<Experience>, ExperienceInput {
@@ -23,7 +23,7 @@ export class Experience implements Deserializable<Experience>, ExperienceInput {
     });
   }
 
-  public deserialize(input: Partial<ExperienceInput>): Experience {
+  deserialize(input: Partial<ExperienceInput>): Experience {
     if (!input) {
       return this;
     }
@@ -31,7 +31,7 @@ export class Experience implements Deserializable<Experience>, ExperienceInput {
     return this;
   }
 
-  public formExperienceString() {
+  formExperienceString() {
     const data = {
       name_job: this. name_job,
       company: this.company,

@@ -79,7 +79,7 @@ const routes: RouteConfig[] = [
             path: '',
             redirect: { name: 'CompleteProfileStep1' },
           },
-        ]
+        ],
       },
       {
         path: 'change-password',

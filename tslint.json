@@ -16,6 +16,8 @@
     "ordered-imports": false,
     "quotemark": [true, "single"],
     "no-string-literal": false,
-    "variable-name": false
+    "variable-name": false,
+    "member-access": [true, "no-public"],
+    "no-console": false
   }
 }

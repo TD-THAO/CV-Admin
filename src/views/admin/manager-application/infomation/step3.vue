@@ -158,13 +158,13 @@ import { MONTH, YEAR } from '@/shared/constants/date';
   },
 })
 export default class EducationInfomation extends Vue {
-  public education: Education = new Education();
-  public training_centers = ['hi'];
-  public faculty_trainings = [
+  education: Education = new Education();
+  training_centers = ['hi'];
+  faculty_trainings = [
     'Tin học',
     'Sư phạm tin',
   ];
-  public rates = [
+  rates = [
     'Yếu',
     'Trung Bình',
     'Khá',
@@ -172,21 +172,21 @@ export default class EducationInfomation extends Vue {
     'Xuất sắc',
   ];
 
-  public months: number[] = MONTH;
-  public years: number[] = YEAR;
+  months: number[] = MONTH;
+  years: number[] = YEAR;
 
-  public mounted() {
+  mounted() {
     console.log(this.education);
 
     this.getEducationInfo();
   }
 
-  public addInfo() {
+  addInfo() {
     // Call api to update user info
     console.log(this.education.formEducationString());
   }
 
-  public getEducationInfo() {
+  getEducationInfo() {
     const data = {
       // name: 'Da Thao',
       // email: 'tdthao29@gmail.com',

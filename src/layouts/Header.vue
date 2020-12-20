@@ -15,8 +15,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+<script lang='ts'>
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
   components: {},
@@ -24,6 +24,6 @@ import { Component, Vue } from "vue-property-decorator";
 export default class Header extends Vue {}
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
 // @import 'ChangePassword.scss';
 </style>

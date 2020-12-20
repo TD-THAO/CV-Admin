@@ -123,23 +123,23 @@ import { MONTH, YEAR } from '@/shared/constants/date';
     ValidationProvider,
   },
 })
-export default class experienceInfomation extends Vue {
-  public experience: Experience = new Experience();
-  public months: number[] = MONTH;
-  public years: number[] = YEAR;
+export default class ExperienceInfomation extends Vue {
+  experience: Experience = new Experience();
+  months: number[] = MONTH;
+  years: number[] = YEAR;
 
-  public mounted() {
+  mounted() {
     console.log(this.experience);
 
     this.getExperienceInfo();
   }
 
-  public addInfo() {
+  addInfo() {
     // Call api to update user info
     console.log(this.experience.formExperienceString());
   }
 
-  public getExperienceInfo() {
+  getExperienceInfo() {
     const data = {
 
     };

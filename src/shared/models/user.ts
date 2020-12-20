@@ -1,20 +1,20 @@
 import { Deserializable } from '@/shared/interfaces/deserialize';
 
 export interface UserInput {
-  name: string,
-  email: string,
-  phone: string,
-  city: string,
-  district: string,
-  address: string,
-  gender: boolean,
-  marital_status: boolean,
-  day: string,
-  month: string,
-  year: string,
-  password: string,
-  new_password: string,
-  confirm_new_password: string,
+  name: string;
+  email: string;
+  phone: string;
+  city: string;
+  district: string;
+  address: string;
+  gender: boolean;
+  marital_status: boolean;
+  day: string;
+  month: string;
+  year: string;
+  password: string;
+  new_password: string;
+  confirm_new_password: string;
 }
 
 export class User implements Deserializable<User>, UserInput {
@@ -45,7 +45,7 @@ export class User implements Deserializable<User>, UserInput {
     });
   }
 
-  public deserialize(input: Partial<UserInput>): User {
+  deserialize(input: Partial<UserInput>): User {
     if (!input) {
       return this;
     }
@@ -53,7 +53,7 @@ export class User implements Deserializable<User>, UserInput {
     return this;
   }
 
-  public formJSONString() {
+  formJSONString() {
     const data = {
       name: this.name,
       email: this.email,
@@ -69,7 +69,7 @@ export class User implements Deserializable<User>, UserInput {
     return data;
   }
 
-  public formpasswordString() {
+  formpasswordString() {
     const data = {
       password: this.password,
       new_password: this.new_password,
