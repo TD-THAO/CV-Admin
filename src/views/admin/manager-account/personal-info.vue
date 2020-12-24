@@ -277,7 +277,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import range from 'lodash/range';
 import { User } from '@/shared/models/user';
 import { DAY, MONTH, YEAR } from '@/shared/constants/date';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase';
 
 @Component({
   components: {
@@ -297,6 +297,16 @@ export default class PersonalInfomation extends Vue {
 
   mounted() {
     this.getUserInfo();
+
+    const user = firebase.auth().currentUser;
+    if (user) {
+      console.log(user);
+
+      console.log("Hello")
+    }
+    else {
+        console.log("Opps :D Bạn chưa đăng nhập rùi")
+    }
   }
 
   updateInfo() {
@@ -320,14 +330,14 @@ export default class PersonalInfomation extends Vue {
     // };
 
     // this.user = new User().deserialize(data);
-    firebase.database().ref('/users').on('value', (snapshot) =>{
-      const data = snapshot.val();
-      console.log(data, 123);
-    }, (error: any) => {
-      if (error) {
-        console.log(error)
-      }
-    });
+    // firebase.database().ref('/users').on('value', (snapshot) =>{
+    //   const data = snapshot.val();
+    //   console.log(data, 123);
+    // }, (error: any) => {
+    //   if (error) {
+    //     console.log(error)
+    //   }
+    // });
 
     // firebase.database().ref('/books').on('value')
     // .then((snapshot) => {

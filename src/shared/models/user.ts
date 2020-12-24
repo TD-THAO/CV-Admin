@@ -18,12 +18,12 @@ export interface UserInput {
 }
 
 export class User implements Deserializable<User>, UserInput {
-  name: string;
-  email: string;
-  phone: string;
+  name: string = '';
+  email: string = '';
+  phone: string = '';
   city: string = '';
   district: string = '';
-  address: string;
+  address: string = '';
   gender: boolean;
   marital_status: boolean;
   day: string = '';
@@ -49,6 +49,7 @@ export class User implements Deserializable<User>, UserInput {
     if (!input) {
       return this;
     }
+
     Object.assign(this, input);
     return this;
   }
@@ -63,7 +64,9 @@ export class User implements Deserializable<User>, UserInput {
       address: this.address,
       gender: this.gender,
       marital_status: this.marital_status,
-      birth_day: this.birth_day,
+      day: this.day,
+      month: this.month,
+      year: this.year,
     };
 
     return data;

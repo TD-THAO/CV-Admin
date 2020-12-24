@@ -7,20 +7,20 @@
           <input
             type="email"
             class="form-control"
-            id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Email"
+            v-model="user.email"
           />
         </div>
         <div class="form-group">
           <input
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
             placeholder="Mật khẩu"
+            v-model="user.password"
           />
         </div>
-        <button type="submit" class="btn btn-gradient btn-gradient--galaxy w-100 rounded-pill mt-4">Đăng nhập</button>
+        <button type="button" class="btn btn-gradient btn-gradient--galaxy w-100 rounded-pill mt-4" @click="login">Đăng nhập</button>
       </form>
 
       <p class="auth-form__footer mt-5 mb-0">
@@ -36,11 +36,47 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import firebase from 'firebase';
+import { User } from '@/shared/models/user';
+import Toast from '@/shared/utils/Toast';
+import { FIREBASE_ERRORS, FIREBASE_ERRORS_MESSAGES } from '@/shared/enums/firebase-errors';
 
 @Component({
   components: {},
 })
-export default class Login extends Vue {}
+export default class Login extends Vue {
+  user: User = new User();
+  isLoading: boolean = false;
+
+  login() {
+    this.isLoading = true;
+    firebase.auth().signInWithEmailAndPassword(this.user.email, this.user.password)
+    .then((res: any) => {
+      console.log(res, 1111);
+
+      this.isLoading = false;
+      this.user = new User().deserialize(res);
+      this.$router.push('/admin')
+    })
+    .catch((error) => {
+      this.isLoading = false;
+      Toast.handleError(error);
+    });
+  }
+
+  mounted() {
+    const user = firebase.auth().currentUser;
+    if (user) {
+      console.log(user);
+
+      console.log("Hello")
+    }
+    else {
+        console.log("Opps :D Bạn chưa đăng nhập rùi")
+    }
+  }
+
+}
 </script>
 
 <style scoped lang="scss">

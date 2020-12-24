@@ -51,12 +51,16 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import firebase from 'firebase';
 
 @Component({
   components: {
   },
 })
-export default class Sidebar extends Vue {}
+export default class Sidebar extends Vue {
+  mounted() {
+  }
+}
 </script>
 
 <style scoped lang="scss">
