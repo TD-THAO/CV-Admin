@@ -1,9 +1,17 @@
 import BaseApi from './BaseApi';
 
 class UserApi extends BaseApi {
-  create(data?: any) {
-    return this.post('posts', data);
+  createWithKey(id: string, data: any) {
+    return this.post('users', id, data);
+  }
+
+  update(id: string, data: any) {
+    return this.post('users', id, data);
+  }
+
+  getUserInfo(id: string) {
+    return this.getOne('users', id);
   }
 }
 
-export default UserApi;
+export default new UserApi;

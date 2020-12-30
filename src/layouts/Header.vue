@@ -23,21 +23,19 @@
 import { Component, Vue } from 'vue-property-decorator';
 import firebase from 'firebase';
 import Toast from '@/shared/utils/Toast';
+import { Authenticate } from '@/shared/models/authenticate';
+import { mapActions } from 'vuex';
 
 @Component({
   components: {},
+  computed: {
+  }
 })
 export default class Header extends Vue {
   isLoading: boolean = false;
+  auth: Authenticate = new Authenticate();
 
   mounted() {
-    firebase.auth().onAuthStateChanged((user: any) => {
-      if (user) {
-        this.getIdToken();
-      } else {
-        console.log(user, 2222);
-      }
-    });
   }
 
   logout() {
@@ -51,18 +49,17 @@ export default class Header extends Vue {
     });
   }
 
-  getIdToken() {
-    firebase.auth().currentUser?.getIdToken(true).then(function(idToken) {
-     console.log(idToken);
+  // getIdToken() {
+  //   firebase.auth().currentUser?.getIdTokenResult(true).then(function(idToken) {
+  //    console.log(idToken, 'idToken');
 
-    }).catch(function(error) {
-      console.log(error);
+  //   }).catch(function(error) {
+  //     console.log(error);
 
-    });
-  }
+  //   });
+  // }
 }
 </script>
 
 <style scoped lang='scss'>
-// @import 'ChangePassword.scss';
 </style>

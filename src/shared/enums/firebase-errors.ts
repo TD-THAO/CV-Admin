@@ -2,7 +2,6 @@ export enum FIREBASE_ERRORS {
   USER_NOT_FOUND = 'auth/user-not-found',
   EMAIL_ALREADY_EXISTS = 'auth/email-already-in-use',
   INVALID_EMAIL = 'auth/invalid-email',
-
 }
 
 export enum FIREBASE_ERRORS_MESSAGES {

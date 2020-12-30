@@ -106,10 +106,8 @@ export default class Register extends Vue {
   private createUserInfor(auth: Authenticate) {
     const dataSet = new User();
     dataSet.email = auth.email;
-    console.log(dataSet, 'dataSet');
-    console.log(dataSet.formJSONString(), 'formJSONString');
 
-    this.database.ref('users/' + `${auth.uid}`).set(dataSet.formJSONString())
+    UserApi.createWithKey(auth.uid, dataSet.formJSONString())
     .then((res: any) => {
       this.isLoading = false;
       Toast.success('Đã tạo tài khoản thành công');
@@ -119,35 +117,6 @@ export default class Register extends Vue {
       this.isLoading = false;
       Toast.handleError(error);
     });
-  }
-
-  setAutoKey() {
-    // const postsRef = this.database.ref("posts");
-
-    // const newPostRef = postsRef.push();
-    // newPostRef.set({
-    //   author: "gracehop",
-    //   title: "Announcing COBOL, a New Programming Language"
-    // });
-
-    // // we can also chain the two calls together
-    // postsRef.push().set({
-    //   author: "alanisawesome",
-    //   title: "The Turing Machine"
-    // });
-    const data = {
-      author: "123123",
-      title: "123123 COBOL, a New Programming Language"
-    }
-    // UserApi.create(data)
-    // .then((res: any) => {
-    //   console.log(res, 11111);
-    // })
-    // .catch((error: any) => {
-    //   console.log(error, 2222);
-
-    //   Toast.handleError(error);
-    // });
   }
 }
 </script>
