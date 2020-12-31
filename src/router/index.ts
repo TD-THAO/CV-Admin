@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import Home from '../views/home/Home.vue';
+import Home from '@/views/home/home.vue';
+import ErrorPage from '@/components/ErrorPage.vue';
+import AuthRoutes from './auth';
+import AdminRoutes from './admin/index';
 
 Vue.use(VueRouter);
 
@@ -9,6 +12,17 @@ const routes: RouteConfig[] = [
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  ...AuthRoutes,
+  ...AdminRoutes,
+  {
+    path: '/404',
+    name: 'PageNotFound',
+    component: ErrorPage,
+  },
+  {
+    path: '*',
+    redirect: { name: 'PageNotFound' },
   },
 ];
 
