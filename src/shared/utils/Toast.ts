@@ -13,6 +13,7 @@ class Toast {
   handleError(error: any) {
     const errorCode = error.code;
     const errorMessage = error.message;
+console.log(errorMessage);
 
     if (errorCode === FIREBASE_ERRORS.USER_NOT_FOUND) {
       return this.error(FIREBASE_ERRORS_MESSAGES.USER_NOT_FOUND);
