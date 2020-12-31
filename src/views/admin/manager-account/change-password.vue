@@ -79,9 +79,9 @@ import { User } from '@/shared/models/user';
   },
 })
 export default class ChangePassword extends Vue {
-  public user: User = new User();
+  user: User = new User();
 
-  public changePassword() {
+  changePassword() {
     // Call api to change password
     console.log(this.user.formpasswordString());
   }

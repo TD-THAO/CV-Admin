@@ -1,14 +1,14 @@
 import { Deserializable } from '@/shared/interfaces/deserialize';
 
 export interface EducationInput {
-  training_center: string,
-  faculty_training: string,
-  name_certificate: number | string,
-  rate: string,
-  start_at_month: number | string,
-  end_at_month: number | string,
-  start_at_year: number | string,
-  end_at_year: number | string,
+  training_center: string;
+  faculty_training: string;
+  name_certificate: number | string;
+  rate: string;
+  start_at_month: number | string;
+  end_at_month: number | string;
+  start_at_year: number | string;
+  end_at_year: number | string;
 }
 
 export class Education implements Deserializable<Education>, EducationInput {
@@ -27,7 +27,7 @@ export class Education implements Deserializable<Education>, EducationInput {
     });
   }
 
-  public deserialize(input: Partial<EducationInput>): Education {
+  deserialize(input: Partial<EducationInput>): Education {
     if (!input) {
       return this;
     }
@@ -35,7 +35,7 @@ export class Education implements Deserializable<Education>, EducationInput {
     return this;
   }
 
-  public formEducationString() {
+  formEducationString() {
     const data = {
       training_center: this. training_center,
       faculty_training: this.faculty_training,

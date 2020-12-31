@@ -43,48 +43,6 @@
               </select>
             </div>
           </div>
-          <!--
-          <div class="col-6 text-center">
-            <div class="form-group">
-              <div class="form-check">
-                <label for="city">Ngoại Ngữ</label>
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="defaultCheck1"
-                />
-              </div>
-
-            </div>
-            <div class="form-group">
-              <div class="form-check">
-                <label for="city">Tiếng Anh</label>
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="defaultCheck1"
-                />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="city">Tiếng Pháp</label>
-            </div>
-            <div class="form-group">
-              <label for="city">Tiếng Nga</label>
-            </div>
-            <div class="form-group">
-              <label for="city">Tiếng Hàn</label>
-            </div>
-            <div class="form-group">
-              <label for="city">Tiếng Trung</label>
-            </div>
-            <div class="form-group">
-              <label for="city">Tiếng Nhật</label>
-            </div>
-          </div>
-          <div class="col-6">b</div> -->
         </div>
       </div>
     </div>
@@ -102,29 +60,32 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
   components: {
 
   },
 })
-export default class skillInfomation extends Vue {
-  public skills = [
+export default class SkillInfomation extends Vue {
+  skills = [
     'Kỹ năng giao tiếp',
+    'Kỹ năng tổ chức',
+    'Kỹ năng lãnh đạo',
+    'Kỹ năng thuyết trình',
     'Kỹ năng làm việc theo nhóm',
-    'Kỹ năng làm việc theo nhóm 1',
-    'Kỹ năng làm việc theo nhóm 2',
-    'Kỹ năng làm việc theo nhóm 3',
-    'Kỹ năng làm việc theo nhóm 4',
-    'Kỹ năng làm việc theo nhóm 5',
+    'Lập kế hoạch',
+    'Giải quyết vấn đề',
+    'Tư duy sáng tạo',
+    'Dễ thích nghi với môi trường mới',
+    'Quản lí thời gian hiệu quả',
   ];
 
-  public levels = [
+  levels = [
     'Sơ cấp', 'Trung cấp', 'Cao cấp', 'Bản ngữ',
   ];
 
-  public foreignLanguages = [
+  foreignLanguages = [
     {
       name: 'Tiếng Anh',
       level: '',
@@ -133,23 +94,35 @@ export default class skillInfomation extends Vue {
       name: 'Tiếng Pháp',
       level: '',
     },
+    {
+      name: 'Tiếng Trung',
+      level: '',
+    },
+    {
+      name: 'Tiếng Nhật',
+      level: '',
+    },
+    {
+      name: 'Tiếng Hàn',
+      level: '',
+    },
   ];
 
-  public selectedLanguages: any = [];
+  selectedLanguages: any = [];
 
-  public selectedSkills = [];
+  selectedSkills = [];
 
-  public mounted() {
+  mounted() {
     this.getSkillInfo();
   }
 
-  public addInfo() {
+  addInfo() {
     // Call api to update user info
     console.log(this.selectedSkills);
-    console.log(this.selectedLanguages)
+    console.log(this.selectedLanguages);
   }
 
-  public getSkillInfo() {
+  getSkillInfo() {
     const data: any = [
       'Kỹ năng giao tiếp',
       'Kỹ năng làm việc theo nhóm',

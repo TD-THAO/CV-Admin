@@ -51,12 +51,16 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import firebase from 'firebase';
 
 @Component({
   components: {
   },
 })
-export default class Sidebar extends Vue {}
+export default class Sidebar extends Vue {
+  mounted() {
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -79,6 +83,8 @@ export default class Sidebar extends Vue {}
     .list-group-item {
       border: 0;
       padding: 0;
+      background: rgba(255, 251, 251, 27%);
+      color: #fff;
     }
   }
 

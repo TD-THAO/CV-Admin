@@ -1,14 +1,14 @@
 import { Deserializable } from '@/shared/interfaces/deserialize';
 
 export interface ApplicationInput {
-  position: string,
-  academic_level: string,
-  years_experience: number | string,
-  workplace: string,
-  career: string,
-  type_work: string,
-  rank: string,
-  salary:number | string,
+  position: string;
+  academic_level: string;
+  years_experience: number | string;
+  workplace: string;
+  career: string;
+  type_work: string;
+  rank: string;
+  salary: number | string;
 }
 
 export class Application implements Deserializable<Application>, ApplicationInput {
@@ -19,7 +19,7 @@ export class Application implements Deserializable<Application>, ApplicationInpu
   career: string = '';
   type_work: string = '';
   rank: string = '';
-  salary: number | string ='';
+  salary: number | string = '';
 
   constructor() {
     this.deserialize({
@@ -27,7 +27,7 @@ export class Application implements Deserializable<Application>, ApplicationInpu
     });
   }
 
-  public deserialize(input: Partial<ApplicationInput>): Application {
+  deserialize(input: Partial<ApplicationInput>): Application {
     if (!input) {
       return this;
     }
@@ -35,7 +35,7 @@ export class Application implements Deserializable<Application>, ApplicationInpu
     return this;
   }
 
-  public formApplicationString() {
+  formApplicationString() {
     const data = {
       position: this.position,
       academic_level: this.academic_level,

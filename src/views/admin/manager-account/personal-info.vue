@@ -268,56 +268,80 @@
         </div>
       </div>
     </ValidationObserver>
+
+    {{ isLoading }}
   </div>
 </template>
 
 <script lang='ts'>
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import range from 'lodash/range';
 import { User } from '@/shared/models/user';
 import { DAY, MONTH, YEAR } from '@/shared/constants/date';
+import { mapActions, mapGetters, mapState } from 'vuex';
+import { Authenticate } from '@/shared/models/authenticate';
+import UserApi from '@/shared/api/User';
+import Toast from '@/shared/utils/Toast';
 
 @Component({
   components: {
     ValidationObserver,
     ValidationProvider,
   },
+   computed: {
+    ...mapState('auth', [
+      'auth',
+    ]),
+   },
 })
 export default class PersonalInfomation extends Vue {
-  public days: number[] = DAY;
-  public months: number[] = MONTH; // mảng để chọn
-  public years: number[] = YEAR;
-  public cities = ['đà nẵng', 'quảng nam'];
-  public districts = ['đà nẵng', 'quảng nam'];
+  days: number[] = DAY;
+  months: number[] = MONTH; // mảng để chọn
+  years: number[] = YEAR;
+  cities = ['đà nẵng', 'quảng nam'];
+  districts = ['đà nẵng', 'quảng nam'];
 
-  public user: User = new User();
+  user: User = new User();
 
-  public mounted() {
-    this.getUserInfo();
+  auth: Authenticate;
+  isLoading: boolean = true;
+  userId: string = '';
+
+  @Watch('auth')
+  watchAuth(newVal: Authenticate, oldVal: Authenticate) {
+    // this.isLoading = false;
+    this.userId = newVal.uid;
+    this.getUserInfo(newVal.uid)
   }
 
-  public updateInfo() {
-    // Call api to update user info
+  mounted() {
+  }
+
+  updateInfo() {
     console.log(this.user.formJSONString());
+    UserApi.update(this.userId, this.user.formJSONString())
+    .then((res: any) => {
+      Toast.success('Cập nhật tài khoản thành công');
+      this.isLoading = false;
+    })
+    .catch((error: any) => {
+      this.isLoading = false;
+      Toast.handleError(error);
+    });
   }
 
-  public getUserInfo() {
-    const data = {
-      name: 'Da Thao',
-      email: 'tdthao29@gmail.com',
-      phone: '0777919749',
-      city: '',
-      district: '',
-      address: '',
-      gender: true,
-      marital_status: false,
-      day: '',
-      month: '',
-      year: '',
-    };
-
-    this.user = new User().deserialize(data);
+  getUserInfo(uid: string) {
+    UserApi.getUserInfo(uid)
+    .then((res: any) => {
+      console.log(res, 'info');
+      this.user = new User().deserialize(res);
+      this.isLoading = false;
+    })
+    .catch((error: any) => {
+      this.isLoading = false;
+      Toast.handleError(error);
+    });
   }
 }
 </script>

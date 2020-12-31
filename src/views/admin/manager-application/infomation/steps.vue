@@ -29,33 +29,32 @@ export default class ManagerApplicationInfo extends Vue {
     {
       path: 'step1',
       name: 'Thông tin cá nhân',
-      icon: '1'
+      icon: '1',
     },
     {
       path: 'step2',
       name: 'Thông tin hồ sơ',
-      icon: '2'
+      icon: '2',
     },
     {
       path: 'step3',
       name: 'Học vấn bằng cấp',
-      icon: '3'
+      icon: '3',
     },
     {
       path: 'step4',
       name: 'Kinh nghiệm làm việc',
-      icon: '4'
+      icon: '4',
     },
     {
       path: 'step5',
       name: 'Kỹ năng',
-      icon: '5'
+      icon: '5',
     },
   ];
 
    private isCurrentRoute(path: string): boolean {
     const lastItem =  this.$route.path.substring( this.$route.path.lastIndexOf('/') + 1);
-    console.log(lastItem);
     return path === lastItem;
   }
 }

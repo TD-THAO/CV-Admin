@@ -8,22 +8,58 @@
             Trang chủ
             </router-link>
           <a class="nav-link" href="#">Tuyển dụng</a>
-          <a class="nav-link" href="#">Thoát</a>
+          <button type="button" class="nav-link btn"
+            @click="logout"
+            :disabled="isLoading">
+            Thoát
+          </button>
         </div>
       </div>
     </nav>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+<script lang='ts'>
+import { Component, Vue } from 'vue-property-decorator';
+import firebase from 'firebase';
+import Toast from '@/shared/utils/Toast';
+import { Authenticate } from '@/shared/models/authenticate';
+import { mapActions } from 'vuex';
 
 @Component({
   components: {},
+  computed: {
+  }
 })
-export default class Header extends Vue {}
+export default class Header extends Vue {
+  isLoading: boolean = false;
+  auth: Authenticate = new Authenticate();
+
+  mounted() {
+  }
+
+  logout() {
+    this.isLoading = true;
+    firebase.auth().signOut().then((res: any) => {
+      this.isLoading = false;
+      this.$router.push('/login');
+    },(error: any) => {
+      this.isLoading = false;
+      Toast.handleError(error);
+    });
+  }
+
+  // getIdToken() {
+  //   firebase.auth().currentUser?.getIdTokenResult(true).then(function(idToken) {
+  //    console.log(idToken, 'idToken');
+
+  //   }).catch(function(error) {
+  //     console.log(error);
+
+  //   });
+  // }
+}
 </script>
 
-<style scoped lang="scss">
-// @import 'ChangePassword.scss';
+<style scoped lang='scss'>
 </style>
