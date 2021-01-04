@@ -8,14 +8,10 @@
       <Header />
 
       <div clas="admin-ctn">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Library</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data</li>
-          </ol>
-        </nav>
-        <router-view></router-view>
+        <!-- <Breadcrumb /> -->
+        <div class="mt-3">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -48,7 +44,6 @@ export default class ManagerApplication extends Vue {
     firebase.auth().onAuthStateChanged((user: any) => {
       if (user) {
         user.providerData.forEach(function (res: Authenticate) {
-          console.log(res);
           _ref.auth = new Authenticate().deserialize(res);
           _ref.auth.uid = user.uid;
         });
@@ -63,10 +58,32 @@ export default class ManagerApplication extends Vue {
 </script>
 
 <style scoped lang='scss'>
-.admin-right {
-  background-color: #eff3f6;
-}
 .breadcrumb {
   background-color: transparent;
+}
+
+.admin {
+  min-height: calc(100vh);
+
+  &-right {
+    background-color: #eff3f6;
+    margin-left: 280px;
+    background-color: #eff3f6;
+  }
+
+  &-left {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 9;
+    height: auto;
+    line-height: inherit;
+    width: 280px;
+    text-align: left;
+    transition: 0.3s;
+    box-shadow: 0 0 21px 0 rgba(89, 102, 122, 0.1);
+    background: url(~@/assets/bg-01.jpg) no-repeat;
+    background-size: cover;
+  }
 }
 </style>

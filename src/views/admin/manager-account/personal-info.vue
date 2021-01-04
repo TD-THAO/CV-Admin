@@ -334,7 +334,7 @@ export default class PersonalInfomation extends Vue {
   getUserInfo(uid: string) {
     UserApi.getUserInfo(uid)
     .then((res: any) => {
-      console.log(res, 'info');
+      // console.log(res, 'info');
       this.user = new User().deserialize(res);
       this.isLoading = false;
     })

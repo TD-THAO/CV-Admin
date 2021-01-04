@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mg-header">
     <nav class="navbar navbar-expand-lg navbar-light border-bottom">
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
@@ -62,4 +62,10 @@ export default class Header extends Vue {
 </script>
 
 <style scoped lang='scss'>
+.mg-header {
+  .navbar {
+    background: #fff;
+    height: 66px;
+  }
+}
 </style>
