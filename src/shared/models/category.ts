@@ -1,13 +1,13 @@
 import { Deserializable } from '@/shared/interfaces/deserialize';
 
 export interface CategoryInput {
-  id?: string | null;
+  id?: string;
   name: string;
 }
 
 export class Category implements Deserializable<Category>, CategoryInput {
   name: string = '';
-  id?: string|null = null;
+  id?: string = '';
 
   constructor() {
     this.deserialize({

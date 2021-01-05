@@ -11,7 +11,7 @@
   >
     <ValidationObserver ref="personalInfoForm" tag="form" v-slot="{ invalid }">
       <div class="modal-header py-2">
-        <h5 class="modal-title text-center">{{ isEdit ? 'Sửa danh mục' : 'Thêm danh mục' }}</h5>
+        <h5 class="modal-title text-center">{{ isEdit ? 'Sửa sản phẩm' : 'Thêm sản phẩm' }}</h5>
         <span @click="closeModal" class="close">&times;</span>
       </div>
       <div class="modal-body modal-body--custom">
@@ -29,10 +29,29 @@
                 type="text"
                 class="form-control"
                 id="name"
-                placeholder="Vui lòng nhập tên danh mục"
-                v-model="category.name"
+                placeholder="Vui lòng nhập tên sản phẩm"
+                v-model="product.name"
               />
 
+              <div class="invalid-error__mess">{{ errors[0] }}</div>
+            </ValidationProvider>
+          </div>
+
+          <div class="form-group">
+            <label for="day">
+              Danh mục <span class="icon-required">*</span>
+            </label>
+            <ValidationProvider
+              name="category"
+              rules="required"
+              v-slot="{ errors }"
+            >
+              <select class="form-control" v-model="product.category.id">
+                <option value="" disabled hidden>--Chọn danh mục--</option>
+                <option v-for="item in categories" :key="item.id" :value="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
               <div class="invalid-error__mess">{{ errors[0] }}</div>
             </ValidationProvider>
           </div>
@@ -59,10 +78,14 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import ProductApi from '@/shared/api/Product';
 import CategoryApi from '@/shared/api/Category';
+
 import Toast from '@/shared/utils/Toast';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
+import { Product } from '@/shared/models/product';
 import { Category } from '@/shared/models/category';
+
 import { cloneDeep } from 'lodash';
 
 @Component({
@@ -71,38 +94,61 @@ import { cloneDeep } from 'lodash';
     ValidationProvider,
   },
 })
-export default class ModalCECategory extends Vue {
+export default class ModalCEProduct extends Vue {
   @Prop(String) readonly name!: string;
-  category: Category = new Category();
+  product: Product = new Product();
+  categories: Category[] = [];
+  catId: any = '';
   isLoading: boolean = false;
   isEdit: boolean = false;
 
   beforeOpen(event: any) {
-    if (event.params && event.params.category) {
+    if (event.params && event.params.product) {
       this.isEdit = true;
-      this.category = cloneDeep(event.params.category);
+      this.product = cloneDeep(event.params.product);
     }
+
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.isLoading = true;
+    CategoryApi.getCategories()
+      .then((res: any) => {
+        this.isLoading = false;
+        this.categories = res.map((item: Category) => new Category().deserialize(item));
+      })
+      .catch((error: any) => {
+        this.isLoading = false;
+        Toast.handleError(error);
+      });
   }
 
   closeModal() {
-    this.category = new Category();
+    this.product = new Product();
     this.$modal.hide(this.name);
   }
 
   submitForm() {
+    const selectedCat = this.categories.filter((item: Category) => item.id === this.product.category.id)[0];
+    const data = {
+      ...this.product.formJSONData(),
+      category: selectedCat,
+    };
+
     if (!this.isEdit) {
-      this.createCategory();
+      this.createProduct(data);
       return;
     }
-    this.updateCategory();
+    this.updateProduct(data);
   }
 
-  createCategory() {
+  createProduct(data: any) {
     this.isLoading = true;
-    CategoryApi.create(this.category.formJSONData())
+    ProductApi.create(data)
     .then((res: any) => {
       this.isLoading = false;
-      Toast.success('Đã tạo danh mục thành công');
+      Toast.success('Đã tạo sản phẩm thành công');
       this.$emit('submit');
       this.closeModal();
     })
@@ -112,13 +158,13 @@ export default class ModalCECategory extends Vue {
     });
   }
 
-  updateCategory() {
+  updateProduct(data: any) {
     this.isLoading = true;
 
-    CategoryApi.update(this.category.id, this.category.formJSONData())
+    ProductApi.update(this.product.id, data)
     .then((res: any) => {
       this.isLoading = false;
-      Toast.success('Đã cập nhật danh mục thành công');
+      Toast.success('Đã cập nhật sản phẩm thành công');
       this.$emit('submit');
       this.closeModal();
     })

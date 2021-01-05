@@ -2,11 +2,11 @@
   <div class="bg-white px-4 py-3 c-card text-left mx-3">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <div class="admin-ctn__title">
-        <h5 class="font-weight-bold mb-0">Danh mục</h5>
+        <h5 class="font-weight-bold mb-0">Sản phẩm</h5>
       </div>
 
       <div>
-        <button type="button" class="btn btn-primary btn-sm" @click="openModalCECategory()">
+        <button type="button" class="btn btn-primary btn-sm" @click="openModalCEProduct()">
           <i class="fa fa-plus"></i>
           <span class="ml-2">Tạo</span>
         </button>
@@ -14,28 +14,30 @@
     </div>
 
     <div >
-      <div class="table-responsive" v-if="categories.length">
+      <div class="table-responsive" v-if="products.length">
         <table class="table">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Tên</th>
+              <th scope="col">Tên sản phẩm</th>
+              <th scope="col">Tên danh mục</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in categories" :key="index">
+            <tr v-for="(item, index) in products" :key="index">
               <td>{{ item.id }}</td>
               <td>{{ item.name }}</td>
+              <td>{{ item.category.name }}</td>
               <td>
                 <button type="button" class="btn btn-danger btn-sm"
-                  @click="openModalDelCategory(item)">
+                  @click="openModalDelProduct(item)">
                   <i class="fa fa-trash-o"></i>
                   <span class="ml-2">Xóa</span>
                 </button>
 
                 <button type="button" class="btn btn-primary btn-sm ml-2"
-                  @click="openModalCECategory(item)">
+                  @click="openModalCEProduct(item)">
                   <i class="fa fa-pencil"></i>
                   <span class="ml-2">Sửa</span>
                 </button>
@@ -45,17 +47,17 @@
         </table>
       </div>
 
-      <p class="text-center mb-0" v-if="!categories.length">Không có dữ liệu</p>
+      <p class="text-center mb-0" v-if="!products.length">Không có dữ liệu</p>
     </div>
 
-    <ModalCECategory
-      name="modalCECategory"
+    <ModalCEProduct
+      name="modalCEProduct"
       @submit="submitModalCE"
     />
 
     <ModalDelete
-      name="modalDelCategory"
-      :value="selectedCat.name"
+      name="modalDelProduct"
+      :value="selectedProduct.name"
       @submit="submitModalDel"
     />
   </div>
@@ -63,36 +65,38 @@
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator';
-import CategoryApi from '@/shared/api/Category';
+import ProductApi from '@/shared/api/Product';
 import Toast from '@/shared/utils/Toast';
-import { Category } from '@/shared/models/category';
-import ModalCECategory from './modal-ce.vue';
+import { Product } from '@/shared/models/product';
+import ModalCEProduct from './modal-ce.vue';
 import ModalDelete from '@/components/ModalDelete.vue';
 import { cloneDeep } from 'lodash';
 
 @Component({
   components: {
-    ModalCECategory,
+    ModalCEProduct,
     ModalDelete,
   },
    computed: {
    },
 })
-export default class Categories extends Vue {
-  categories: Category[] = [];
+export default class Products extends Vue {
+  products: Product[] = [];
   isLoading: boolean = false;
-  selectedCat: Category = new Category();
+  selectedProduct: Product = new Product();
 
   mounted() {
-    this.getCategories();
+    this.getProducts();
   }
 
-  getCategories() {
+  getProducts() {
     this.isLoading = true;
-    CategoryApi.getCategories()
+    ProductApi.getProducts()
       .then((res: any) => {
         this.isLoading = false;
-        this.categories = res.map((item: Category) => new Category().deserialize(item));
+        this.products = res.map((item: Product) => new Product().deserialize(item));
+        console.log(this.products);
+
       })
       .catch((error: any) => {
         this.isLoading = false;
@@ -100,31 +104,31 @@ export default class Categories extends Vue {
       });
   }
 
-  openModalCECategory(cat: Category) {
-    if (cat) {
-      this.$modal.show('modalCECategory', { category: cat } );
+  openModalCEProduct(product: Product) {
+    if (product) {
+      this.$modal.show('modalCEProduct', { product: product } );
     } else {
-      this.$modal.show('modalCECategory');
+      this.$modal.show('modalCEProduct');
     }
   }
 
-  openModalDelCategory(cat: Category) {
-    this.$modal.show('modalDelCategory');
-    this.selectedCat = cloneDeep(cat);
+  openModalDelProduct(product: Product) {
+    this.$modal.show('modalDelProduct');
+    this.selectedProduct = cloneDeep(product);
   }
 
   submitModalCE() {
-    this.getCategories();
+    this.getProducts();
   }
 
   submitModalDel() {
     this.isLoading = true;
-    CategoryApi.remove(this.selectedCat.id, this.selectedCat.formJSONData())
+    ProductApi.remove(this.selectedProduct.id, this.selectedProduct.formJSONData())
     .then((res: any) => {
       this.isLoading = false;
-      Toast.success('Đã xóa danh mục thành công');
-      this.$modal.hide('modalDelCategory');
-      this.getCategories();
+      Toast.success('Đã xóa sản phẩm thành công');
+      this.$modal.hide('modalDelProduct');
+      this.getProducts();
     })
     .catch((error: any) => {
       this.isLoading = false;
