@@ -3,11 +3,11 @@ import { FIREBASE_ERRORS, FIREBASE_ERRORS_MESSAGES } from '../enums/firebase-err
 
 class Toast {
   success(message: string, options?: any) {
-    return Vue.$toast.success(message, options)
+    return Vue.$toast.success(message, options);
   }
 
   error(message: string, options?: any) {
-    return Vue.$toast.error(message, options)
+    return Vue.$toast.error(message, options);
   }
 
   handleError(error: any) {

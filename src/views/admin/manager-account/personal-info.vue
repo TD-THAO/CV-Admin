@@ -297,13 +297,11 @@ import Toast from '@/shared/utils/Toast';
 })
 export default class PersonalInfomation extends Vue {
   days: number[] = DAY;
-  months: number[] = MONTH; // mảng để chọn
+  months: number[] = MONTH;
   years: number[] = YEAR;
   cities = ['đà nẵng', 'quảng nam'];
   districts = ['đà nẵng', 'quảng nam'];
-
   user: User = new User();
-
   auth: Authenticate;
   isLoading: boolean = true;
   userId: string = '';
@@ -312,14 +310,10 @@ export default class PersonalInfomation extends Vue {
   watchAuth(newVal: Authenticate, oldVal: Authenticate) {
     // this.isLoading = false;
     this.userId = newVal.uid;
-    this.getUserInfo(newVal.uid)
-  }
-
-  mounted() {
+    this.getUserInfo(newVal.uid);
   }
 
   updateInfo() {
-    console.log(this.user.formJSONString());
     UserApi.update(this.userId, this.user.formJSONString())
     .then((res: any) => {
       Toast.success('Cập nhật tài khoản thành công');
@@ -334,7 +328,6 @@ export default class PersonalInfomation extends Vue {
   getUserInfo(uid: string) {
     UserApi.getUserInfo(uid)
     .then((res: any) => {
-      console.log(res, 'info');
       this.user = new User().deserialize(res);
       this.isLoading = false;
     })
@@ -345,7 +338,3 @@ export default class PersonalInfomation extends Vue {
   }
 }
 </script>
-
-<style scoped lang='scss'>
-// @import 'PersonalInfomation.scss';
-</style>
