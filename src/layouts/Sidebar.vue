@@ -41,9 +41,9 @@ export default class Sidebar extends Vue {
       path: '/admin/categories',
     },
     {
-      name: 'menu 2',
-      icon: 'fa fa-users',
-      path: '',
+      name: 'Sản phẩm',
+      icon: 'fa fa-product-hunt',
+      path: '/admin/products',
     },
   ];
 

@@ -14,12 +14,12 @@
     </div>
 
     <div class="modal-footer pt-2 pb-2 justify-content-center">
-      <button class="btn btn-secondary"
+      <button class="btn btn-secondary btn-mw-100"
         :disabled="isLoading"
         @click="closeModal">
         Hủy
       </button>
-      <button class="btn btn-primary"
+      <button class="btn btn-danger btn-mw-100"
         :disabled="isLoading"
         @click="submitForm">
         Xóa
@@ -34,7 +34,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
   components: {
   },
 })
-export default class ModalDeleteCategory extends Vue {
+export default class ModalDelete extends Vue {
   @Prop(String) readonly name!: string;
   @Prop(String) readonly value!: string;
   @Prop({default: false}) readonly isLoading!: boolean;
