@@ -40,10 +40,10 @@ export default class ManagerApplication extends Vue {
   }
 
   checkLogin() {
-    let _ref = this;
+    const _ref = this;
     firebase.auth().onAuthStateChanged((user: any) => {
       if (user) {
-        user.providerData.forEach(function (res: Authenticate) {
+        user.providerData.forEach((res: Authenticate) => {
           _ref.auth = new Authenticate().deserialize(res);
           _ref.auth.uid = user.uid;
         });

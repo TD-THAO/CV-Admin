@@ -8,7 +8,7 @@ abstract class BaseApi {
 
   get(refName: string, data?: any) {
     const ref = firebase.database().ref(`${refName}`);
-    let array: any[] = [];
+    const array: any[] = [];
     return new Promise((resolve, reject) => {
       const onError = (error: any) => reject(error);
       const onData = (snapshot: any) => {
@@ -21,9 +21,6 @@ abstract class BaseApi {
               ...valArray[key],
             });
           });
-
-          console.log(array);
-
         }
         return resolve(array);
       };
@@ -32,14 +29,14 @@ abstract class BaseApi {
     });
   }
 
-  getOne(refName: string, id: string, data?: any) {
+  getOne(refName: string, id: any, data?: any) {
     const ref = firebase.database().ref(`${refName}/${id}`);
     return ref.once('value').then((snapshot) => {
       return snapshot.val();
     });
   }
 
-  post(refName: string, id: string, data?: any) {
+  post(refName: string, id: any, data?: any) {
     const ref = firebase.database().ref(`${refName}/${id}`);
     return ref.set(data);
   }
@@ -47,6 +44,11 @@ abstract class BaseApi {
   postWithAutoKey(refName: string, data?: any) {
     const ref = firebase.database().ref(refName);
     return ref.push().set(data);
+  }
+
+  delete(refName: string, id: any, data?: any) {
+    const ref = firebase.database().ref(`${refName}/${id}`);
+    return ref.set(null);
   }
 }
 

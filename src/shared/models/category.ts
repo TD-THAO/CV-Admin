@@ -1,12 +1,13 @@
 import { Deserializable } from '@/shared/interfaces/deserialize';
 
 export interface CategoryInput {
-  id?: string;
+  id?: string | null;
   name: string;
 }
 
 export class Category implements Deserializable<Category>, CategoryInput {
   name: string = '';
+  id?: string|null = null;
 
   constructor() {
     this.deserialize({
@@ -20,6 +21,12 @@ export class Category implements Deserializable<Category>, CategoryInput {
     }
     Object.assign(this, input);
     return this;
+  }
+
+  formJSONData() {
+    return {
+      name: this.name || '',
+    };
   }
 }
 

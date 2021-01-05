@@ -6,7 +6,7 @@
       </div>
 
       <div>
-        <button type="button" class="btn btn-primary btn-sm" @click="openModalCECategory">
+        <button type="button" class="btn btn-primary btn-sm" @click="openModalCECategory()">
           <i class="fa fa-plus"></i>
           <span class="ml-2">Tạo</span>
         </button>
@@ -28,8 +28,14 @@
               <td>{{ item.id }}</td>
               <td>{{ item.name }}</td>
               <td>
-                <button type="button" class="btn btn-primary btn-sm"
-                  @click="editCat(item)">
+                <button type="button" class="btn btn-danger btn-sm"
+                  @click="openModalDelCategory(item)">
+                  <i class="fa fa-trash-o"></i>
+                  <span class="ml-2">Xóa</span>
+                </button>
+
+                <button type="button" class="btn btn-primary btn-sm ml-2"
+                  @click="openModalCECategory(item)">
                   <i class="fa fa-pencil"></i>
                   <span class="ml-2">Sửa</span>
                 </button>
@@ -44,8 +50,13 @@
 
     <ModalCECategory
       name="modalCECategory"
-      @cancel="closeModal"
-      @submit="submitModal"
+      @submit="submitModalCE"
+    />
+
+    <ModalDeleteCategory
+      name="modalDelCategory"
+      :value="selectedCat.name"
+      @submit="submitModalDel"
     />
   </div>
 </template>
@@ -56,10 +67,13 @@ import CategoryApi from '@/shared/api/Category';
 import Toast from '@/shared/utils/Toast';
 import { Category } from '@/shared/models/category';
 import ModalCECategory from './modal-ce.vue';
+import ModalDeleteCategory from '@/components/ModalDelete.vue';
+import { cloneDeep } from 'lodash';
 
 @Component({
   components: {
     ModalCECategory,
+    ModalDeleteCategory,
   },
    computed: {
    },
@@ -67,19 +81,18 @@ import ModalCECategory from './modal-ce.vue';
 export default class Categories extends Vue {
   categories: Category[] = [];
   isLoading: boolean = false;
+  selectedCat: Category = new Category();
 
   mounted() {
     this.getCategories();
   }
 
   getCategories() {
-    console.log( this.categories, 1111)
     this.isLoading = true;
     CategoryApi.getCategories()
       .then((res: any) => {
         this.isLoading = false;
         this.categories = res.map((item: Category) => new Category().deserialize(item));
-        console.log(this.categories, 22222);
       })
       .catch((error: any) => {
         this.isLoading = false;
@@ -87,39 +100,36 @@ export default class Categories extends Vue {
       });
   }
 
-  createCategory() {
+  openModalCECategory(cat: Category) {
+    if (cat) {
+      this.$modal.show('modalCECategory', { category: cat } );
+    } else {
+      this.$modal.show('modalCECategory');
+    }
+  }
+
+  openModalDelCategory(cat: Category) {
+    this.$modal.show('modalDelCategory');
+    this.selectedCat = cloneDeep(cat);
+  }
+
+  submitModalCE() {
+    this.getCategories();
+  }
+
+  submitModalDel() {
     this.isLoading = true;
-    const data = {
-      name: 'category 2',
-    };
-
-    console.log(data);
-
-
-    CategoryApi.create(data)
+    CategoryApi.remove(this.selectedCat.id, this.selectedCat.formJSONData())
     .then((res: any) => {
       this.isLoading = false;
-      Toast.success('Đã tạo danh mục thành công');
-      // this.$router.push('/login');
+      Toast.success('Đã xóa danh mục thành công');
+      this.$modal.hide('modalDelCategory');
+      this.getCategories();
     })
     .catch((error: any) => {
       this.isLoading = false;
       Toast.handleError(error);
     });
-  }
-
-  openModalCECategory() {
-    this.$modal.show('modalCECategory');
-  }
-
-  submitModal(e: any) {
-    console.log(1111);
-
-  }
-
-  closeModal(e: any) {
-    console.log(2222);
-
   }
 }
 </script>

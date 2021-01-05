@@ -33,11 +33,5 @@ import Toast from '@/shared/utils/Toast';
    },
 })
 export default class Dashboard extends Vue {
-  mounted() {
-  }
 }
 </script>
-
-<style scoped lang='scss'>
-// @import 'PersonalInfomation.scss';
-</style>

@@ -47,9 +47,6 @@ export default class Sidebar extends Vue {
     },
   ];
 
-  mounted() {
-  }
-
   activeRoute(item: any) {
     if (item.path === this.$route.path) {
       return true;
@@ -61,36 +58,6 @@ export default class Sidebar extends Vue {
 </script>
 
 <style scoped lang="scss">
-// @import 'ChangePassword.scss';
-// .mg-sidebar {
-//   .fa {
-//     width: 20px;
-//   }
-//   a {
-//     text-decoration: none;
-//     color: black;
-//   }
-// }
-
-// .sidebar-list {
-//   &__group-parent {
-//     box-shadow: 0 0 21px 0 rgba(89, 102, 122, 0.1);
-//     height: 100vh;
-
-//     .list-group-item {
-//       border: 0;
-//       padding: 0;
-//       background: rgba(255, 251, 251, 27%);
-//       color: #fff;
-//     }
-//   }
-
-//   &__item-header {
-//     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-//     padding: 1rem;
-//   }
-// }
-
 .mg-sidebar {
   height: 100%;
   background: rgba(149, 104, 213, .62);
