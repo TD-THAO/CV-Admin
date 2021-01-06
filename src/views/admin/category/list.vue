@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white px-4 py-3 c-card text-left mx-3">
+  <div class="bg-white px-4 py-3 c-card text-left mx-3 position-relative">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <div class="admin-ctn__title">
         <h5 class="font-weight-bold mb-0">Danh mục</h5>
@@ -45,8 +45,10 @@
         </table>
       </div>
 
-      <p class="text-center mb-0" v-if="!categories.length">Không có dữ liệu</p>
+      <p class="text-center mb-0" v-if="!isLoading && !categories.length">Không có dữ liệu</p>
     </div>
+
+    <PageLoader v-if="isLoading"/>
 
     <ModalCECategory
       name="modalCECategory"
@@ -69,11 +71,13 @@ import { Category } from '@/shared/models/category';
 import ModalCECategory from './modal-ce.vue';
 import ModalDelete from '@/components/ModalDelete.vue';
 import { cloneDeep } from 'lodash';
+import PageLoader from '@/components/PageLoader.vue';
 
 @Component({
   components: {
     ModalCECategory,
     ModalDelete,
+    PageLoader,
   },
    computed: {
    },

@@ -3,11 +3,6 @@
     <nav class="navbar navbar-expand-lg navbar-light border-bottom">
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-           <router-link class="nav-link"
-            to="/home">
-            Trang chủ
-            </router-link>
-          <a class="nav-link" href="#">Tuyển dụng</a>
           <button type="button" class="nav-link btn"
             @click="logout"
             :disabled="isLoading">

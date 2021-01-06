@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-white px-4 py-3 c-card text-left mx-3">
+  <div class="bg-white px-4 py-3 c-card text-left mx-3 position-relative">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <div class="admin-ctn__title">
         <h5 class="font-weight-bold mb-0">Sản phẩm</h5>
       </div>
 
       <div>
-        <button type="button" class="btn btn-primary btn-sm" @click="openModalCEProduct()">
+        <button type="button" class="btn btn-primary btn-sm" @click="openModalCEProduct()" :disabled="isLoading">
           <i class="fa fa-plus"></i>
           <span class="ml-2">Tạo</span>
         </button>
@@ -47,8 +47,10 @@
         </table>
       </div>
 
-      <p class="text-center mb-0" v-if="!products.length">Không có dữ liệu</p>
+      <p class="text-center mb-0" v-if="!isLoading && !products.length">Không có dữ liệu</p>
     </div>
+
+    <PageLoader v-if="isLoading"/>
 
     <ModalCEProduct
       name="modalCEProduct"
@@ -71,11 +73,13 @@ import { Product } from '@/shared/models/product';
 import ModalCEProduct from './modal-ce.vue';
 import ModalDelete from '@/components/ModalDelete.vue';
 import { cloneDeep } from 'lodash';
+import PageLoader from '@/components/PageLoader.vue';
 
 @Component({
   components: {
     ModalCEProduct,
     ModalDelete,
+    PageLoader,
   },
    computed: {
    },
