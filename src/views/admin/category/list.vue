@@ -18,14 +18,14 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">STT</th>
               <th scope="col">Tên</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(item, index) in categories" :key="index">
-              <td>{{ item.id }}</td>
+              <td>{{ index + 1 }}</td>
               <td>{{ item.name }}</td>
               <td>
                 <button type="button" class="btn btn-danger btn-sm"
