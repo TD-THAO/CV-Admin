@@ -18,7 +18,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">STT</th>
               <th scope="col">Tên sản phẩm</th>
               <th scope="col">Tên danh mục</th>
               <th scope="col"></th>
@@ -26,7 +26,7 @@
           </thead>
           <tbody>
             <tr v-for="(item, index) in products" :key="index">
-              <td>{{ item.id }}</td>
+              <td>{{ index + 1 }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.category.name }}</td>
               <td>
